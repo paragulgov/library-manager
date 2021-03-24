@@ -7,4 +7,7 @@
 # Editor-based HTTP Client requests
 /httpRequests/
 
-/.idea
+/library-manager.iml
+/modules.xml
+/vcs.xml
+/php.xml
