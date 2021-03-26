@@ -1,6 +1,6 @@
 <?php
 
-require_once 'connect.php';
+require_once 'config/connect.php';
 
 ?>
 
@@ -25,51 +25,64 @@ require_once 'connect.php';
         <a class="item">Testimonials</a>
         <a class="item active">Sign-in</a>
     </div>
+
     <div class="ui black segment">
-        <div class="ui form">
+        <form action="books/addBook.php" method="post" class="ui form">
             <div class="fields">
                 <div class="field">
                     <label>Title</label>
-                    <input type="text" placeholder="Title">
+                    <input type="text" placeholder="Title" name="title">
                 </div>
                 <div class="field">
                     <label>Description</label>
-                    <input type="text" placeholder="Description">
+                    <input type="text" placeholder="Description" name="description">
                 </div>
                 <div class="field">
                     <label>Year</label>
-                    <input type="text" maxlength="4" placeholder="Year">
+                    <input type="text" maxlength="4" placeholder="Year" name="year">
                 </div>
 
                 <div class="ui form">
                     <div class="field">
                         <label>Genre</label>
-                        <select>
+                        <select name="genre">
                             <option value="">Choose a genre</option>
-                            <option value="1">Сказка</option>
-                            <option value="0">Драма</option>
+                            <?php
+                            $genres = mysqli_query($connect, query: "SELECT * FROM `genres`");
+                            $genres = mysqli_fetch_all($genres);
+                            foreach ($genres as $genre) {
+                                ?>
+                                <option value="<?= $genre[0] ?>"><?= $genre[1] ?></option>
+                                <?php
+                            }
+                            ?>
                         </select>
                     </div>
                 </div>
 
                 <div class="field">
                     <label>Author</label>
-                    <select>
+                    <select name="author">
                         <option value="">Choose author</option>
-                        <option value="1">Лев Николаевич Толстой</option>
-                        <option value="0">Ствен Кинг</option>
+
+                        <?php
+                        $authors = mysqli_query($connect, query: "SELECT * FROM `authors`");
+                        $authors = mysqli_fetch_all($authors);
+                        foreach ($authors as $author) {
+                            ?>
+                            <option value="<?= $author[0] ?>"><?= $author[1] ?></option>
+                            <?php
+                        }
+                        ?>
                     </select>
                 </div>
 
-                <div class="ui animated button" tabindex="0" style="align-self: flex-end; margin-bottom: 2px;">
-                    <div class="visible content">Add</div>
-                    <div class="hidden content">
-                        <i class="check icon"></i>
-                    </div>
-                </div>
+                <button type="submit" class="ui icon button" style="align-self: flex-end; margin-bottom: 2px;">
+                    <i class="plus icon"></i>
+                </button>
 
             </div>
-        </div>
+        </form>
     </div>
 
     <table class="ui celled table">
@@ -88,7 +101,7 @@ require_once 'connect.php';
         </thead>
         <tbody>
         <?php
-        $products = mysqli_query($connect, query: "SELECT id_book, title, description, year, authors.full_name, genres.genre FROM `books` JOIN authors ON books.id_author = authors.id_author JOIN genres ON books.id_genre = genres.id_genre");
+        $products = mysqli_query($connect, query: "SELECT id_book, title, description, year, authors.full_name, genres.genre FROM `books` JOIN authors ON books.id_author = authors.id_author JOIN genres ON books.id_genre = genres.id_genre ORDER BY id_book");
         $products = mysqli_fetch_all($products);
         foreach ($products as $product) {
             ?>
