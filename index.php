@@ -21,9 +21,9 @@ require_once 'config/connect.php';
         <div class="item">
             <img src="https://de.donstu.ru/CDOSite/Conf/images/dstu.jpg">
         </div>
-        <a class="item">Features</a>
+        <a href="index.php" class="item active">Books</a>
         <a class="item">Testimonials</a>
-        <a class="item active">Sign-in</a>
+        <a class="item">Sign-in</a>
     </div>
 
     <div class="ui black segment">
@@ -42,23 +42,23 @@ require_once 'config/connect.php';
                     <input type="text" maxlength="4" placeholder="Year" name="year">
                 </div>
 
-                <div class="ui form">
-                    <div class="field">
-                        <label>Genre</label>
-                        <select name="genre">
-                            <option value="">Choose a genre</option>
-                            <?php
-                            $genres = mysqli_query($connect, query: "SELECT * FROM `genres`");
-                            $genres = mysqli_fetch_all($genres);
-                            foreach ($genres as $genre) {
-                                ?>
-                                <option value="<?= $genre[0] ?>"><?= $genre[1] ?></option>
-                                <?php
-                            }
+
+                <div class="field">
+                    <label>Genre</label>
+                    <select name="genre">
+                        <option value="">Choose a genre</option>
+                        <?php
+                        $genres = mysqli_query($connect, query: "SELECT * FROM `genres`");
+                        $genres = mysqli_fetch_all($genres);
+                        foreach ($genres as $genre) {
                             ?>
-                        </select>
-                    </div>
+                            <option value="<?= $genre[0] ?>"><?= $genre[1] ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
                 </div>
+
 
                 <div class="field">
                     <label>Author</label>
@@ -101,26 +101,36 @@ require_once 'config/connect.php';
         </thead>
         <tbody>
         <?php
-        $products = mysqli_query($connect, query: "SELECT id_book, title, description, year, authors.full_name, genres.genre FROM `books` JOIN authors ON books.id_author = authors.id_author JOIN genres ON books.id_genre = genres.id_genre ORDER BY id_book");
-        $products = mysqli_fetch_all($products);
-        foreach ($products as $product) {
+        $books = mysqli_query($connect, query: "SELECT id_book, title, description, year, authors.full_name, genres.genre FROM `books` JOIN authors ON books.id_author = authors.id_author JOIN genres ON books.id_genre = genres.id_genre ORDER BY id_book");
+        $books = mysqli_fetch_all($books);
+        foreach ($books as $book) {
             ?>
             <tr>
-                <td><?= $product[0] ?></td>
-                <td><?= $product[1] ?></td>
-                <td><?= $product[2] ?></td>
-                <td><?= $product[3] ?></td>
-                <td><?= $product[4] ?></td>
-                <td><?= $product[5] ?></td>
+                <td><?= $book[0] ?></td>
+                <td><?= $book[1] ?></td>
+                <td><?= $book[2] ?></td>
+                <td><?= $book[3] ?></td>
+                <td><?= $book[4] ?></td>
+                <td><?= $book[5] ?></td>
                 <td>
-                    <button class="ui icon button">
-                        <i class="close icon"></i>
-                    </button>
+                    <a href="books/updatePage.php">
+                        <div class="ui vertical animated button" tabindex="0">
+                            <div class="hidden content">Delete</div>
+                            <div class="visible content">
+                                <i class="close icon"></i>
+                            </div>
+                        </div>
+                    </a>
                 </td>
                 <td>
-                    <button class="ui icon button">
-                        <i class="edit icon"></i>
-                    </button>
+                    <a href="books/updatePage.php?id=<?= $book[0] ?>">
+                        <div class="ui vertical animated button" tabindex="0">
+                            <div class="hidden content">Edit</div>
+                            <div class="visible content">
+                                <i class="edit icon"></i>
+                            </div>
+                        </div>
+                    </a>
                 </td>
                 <td>Comment</td>
             </tr>
