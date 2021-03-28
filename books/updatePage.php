@@ -1,10 +1,10 @@
 <?php
 require_once '../config/connect.php';
 
-
 $book_id = $_GET['id'];
 $book = mysqli_query($connect, query: "SELECT * FROM `books` WHERE `id_book` = '$book_id'");
 $book = mysqli_fetch_assoc($book);
+print_r($book)
 ?>
 
 <!doctype html>
@@ -15,7 +15,7 @@ $book = mysqli_fetch_assoc($book);
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-    <title>Update Book</title>
+    <title>Library Manager</title>
 </head>
 <body>
 <div class="ui container">
@@ -24,7 +24,7 @@ $book = mysqli_fetch_assoc($book);
             <img src="https://de.donstu.ru/CDOSite/Conf/images/dstu.jpg">
         </div>
         <a href="../index.php" class="item">Books</a>
-        <a class="item">Authors</a>
+        <a href="../authors/index.php" class="item">Authors</a>
         <a class="item">Genres</a>
     </div>
 
@@ -38,8 +38,7 @@ $book = mysqli_fetch_assoc($book);
                 </div>
                 <div class="field">
                     <label>Description</label>
-                    <input type="text" name="description" placeholder="Description"
-                           value="<?= $book['description'] ?>">
+                    <input type="text" name="description" placeholder="Description" value="<?= $book['description'] ?>">
                 </div>
                 <div class="field">
                     <label>Year</label>

@@ -11,7 +11,7 @@ require_once 'config/connect.php';
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lab 2</title>
+    <title>Library Manager</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 </head>
 <body>
@@ -22,7 +22,7 @@ require_once 'config/connect.php';
             <img src="https://de.donstu.ru/CDOSite/Conf/images/dstu.jpg">
         </div>
         <a href="index.php" class="item active">Books</a>
-        <a class="item">Authors</a>
+        <a href="authors/index.php" class="item">Authors</a>
         <a class="item">Genres</a>
     </div>
 
