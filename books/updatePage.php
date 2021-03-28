@@ -24,8 +24,8 @@ $book = mysqli_fetch_assoc($book);
             <img src="https://de.donstu.ru/CDOSite/Conf/images/dstu.jpg">
         </div>
         <a href="../index.php" class="item">Books</a>
-        <a class="item">Testimonials</a>
-        <a class="item">Sign-in</a>
+        <a class="item">Authors</a>
+        <a class="item">Genres</a>
     </div>
 
     <div class="ui black segment">

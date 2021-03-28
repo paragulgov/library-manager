@@ -22,8 +22,8 @@ require_once 'config/connect.php';
             <img src="https://de.donstu.ru/CDOSite/Conf/images/dstu.jpg">
         </div>
         <a href="index.php" class="item active">Books</a>
-        <a class="item">Testimonials</a>
-        <a class="item">Sign-in</a>
+        <a class="item">Authors</a>
+        <a class="item">Genres</a>
     </div>
 
     <div class="ui black segment">
@@ -113,7 +113,7 @@ require_once 'config/connect.php';
                 <td><?= $book[4] ?></td>
                 <td><?= $book[5] ?></td>
                 <td>
-                    <a href="books/updatePage.php">
+                    <a href="books/deleteBook.php?id=<?= $book[0] ?>">
                         <div class="ui vertical animated button" tabindex="0">
                             <div class="hidden content">Delete</div>
                             <div class="visible content">
