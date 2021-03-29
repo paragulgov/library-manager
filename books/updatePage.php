@@ -4,7 +4,6 @@ require_once '../config/connect.php';
 $book_id = $_GET['id'];
 $book = mysqli_query($connect, query: "SELECT * FROM `books` WHERE `id_book` = '$book_id'");
 $book = mysqli_fetch_assoc($book);
-print_r($book)
 ?>
 
 <!doctype html>

@@ -22,24 +22,16 @@ require_once '../config/connect.php';
             <img src="https://de.donstu.ru/CDOSite/Conf/images/dstu.jpg">
         </div>
         <a href="../index.php" class="item">Books</a>
-        <a class="item active">Authors</a>
-        <a href="../genres/index.php" class="item">Genres</a>
+        <a href="../authors/index.php" class="item">Authors</a>
+        <a class="item active">Genres</a>
     </div>
 
     <div class="ui black segment">
-        <form action="addAuthor.php" method="post" class="ui form">
+        <form action="addGenre.php" method="post" class="ui form">
             <div class="fields">
                 <div class="field" style="flex-grow: 1">
-                    <label>Full name</label>
-                    <input type="text" placeholder="Full name" name="full_name">
-                </div>
-                <div class="field">
-                    <label>Date of birth</label>
-                    <input type="date" name="date_of_birth">
-                </div>
-                <div class="field">
-                    <label>Date of death</label>
-                    <input type="date" name="date_of_death">
+                    <label>Genre</label>
+                    <input type="text" placeholder="Genre" name="genre">
                 </div>
                 <button type="submit" class="ui icon button" style="align-self: flex-end; margin-bottom: 2px;">
                     <i class="plus icon"></i>
@@ -51,27 +43,24 @@ require_once '../config/connect.php';
     <table class="ui celled table">
         <thead>
         <tr>
-            <th>ID author</th>
-            <th>Full name</th>
-            <th>Date of birth</th>
-            <th>Date of death</th>
+            <th>ID genre</th>
+            <th>Genre</th>
             <th>Delete</th>
             <th>Edit</th>
         </tr>
         </thead>
         <tbody>
         <?php
-        $authors = mysqli_query($connect, query: "SELECT id_author, full_name, date_of_birth, date_of_death FROM `authors` ORDER BY id_author");
-        $authors = mysqli_fetch_all($authors);
-        foreach ($authors as $author) {
+        $genres = mysqli_query($connect, query: "SELECT * FROM `genres` ORDER BY `id_genre`");
+        $genres = mysqli_fetch_all($genres);
+        foreach ($genres as $genre) {
             ?>
             <tr>
-                <td><?= $author[0] ?></td>
-                <td><?= $author[1] ?></td>
-                <td><?= $author[2] ?></td>
-                <td><?= $author[3] ?></td>
+                <td><?= $genre[0] ?></td>
+                <td><?= $genre[1] ?></td>
+
                 <td>
-                    <a href="deleteAuthor.php?id=<?= $author[0] ?>">
+                    <a href="deleteGenre.php?id=<?= $genre[0] ?>">
                         <div class="ui vertical animated button" tabindex="0">
                             <div class="hidden content">Delete</div>
                             <div class="visible content">
@@ -81,7 +70,7 @@ require_once '../config/connect.php';
                     </a>
                 </td>
                 <td>
-                    <a href="updatePage.php?id=<?= $author[0] ?>">
+                    <a href="updatePage.php?id=<?= $genre[0] ?>">
                         <div class="ui vertical animated button" tabindex="0">
                             <div class="hidden content">Edit</div>
                             <div class="visible content">

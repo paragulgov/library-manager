@@ -23,7 +23,7 @@ require_once 'config/connect.php';
         </div>
         <a href="index.php" class="item active">Books</a>
         <a href="authors/index.php" class="item">Authors</a>
-        <a class="item">Genres</a>
+        <a href="genres/index.php" class="item">Genres</a>
     </div>
 
     <div class="ui black segment">

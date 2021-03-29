@@ -2,8 +2,8 @@
 require_once '../config/connect.php';
 
 $author_id = $_GET['id'];
-$author = mysqli_query($connect, query: "SELECT * FROM `authors` WHERE `id_author` = '$author_id'");
-$author = mysqli_fetch_assoc($author);
+$genre = mysqli_query($connect, query: "SELECT * FROM `genres` WHERE `id_genre` = '$author_id'");
+$genre = mysqli_fetch_assoc($genre);
 ?>
 
 <!doctype html>
@@ -28,21 +28,11 @@ $author = mysqli_fetch_assoc($author);
     </div>
 
     <div class="ui black segment">
-        <form action="updateAuthor.php" method="post" class="ui form">
-            <input type="hidden" value="<?= $author['id_author'] ?>" name="id">
-            <div class="fields">
-                <div class="field" style="flex-grow: 1">
-                    <label>Full name</label>
-                    <input type="text" placeholder="Full name" name="full_name" value="<?= $author['full_name'] ?>">
-                </div>
-                <div class="field">
-                    <label>Date of birth</label>
-                    <input type="date" name="date_of_birth" value="<?= $author['date_of_birth'] ?>">
-                </div>
-                <div class="field">
-                    <label>Date of death</label>
-                    <input type="date" name="date_of_death" value="<?= $author['date_of_death'] ?>">
-                </div>
+        <form action="updateGenre.php" method="post" class="ui form">
+            <input type="hidden" value="<?= $genre['id_genre'] ?>" name="id">
+            <div class="field" style="flex-grow: 1">
+                <label>Genre</label>
+                <input type="text" placeholder="Genre" name="genre" value="<?= $genre['genre'] ?>">
             </div>
             <button class="ui button" type="submit">Update</button>
         </form>
