@@ -24,7 +24,8 @@ $book = mysqli_fetch_assoc($book);
         </div>
         <a href="../index.php" class="item">Books</a>
         <a href="../authors/index.php" class="item">Authors</a>
-        <a class="item">Genres</a>
+        <a href="../genres/index.php" class="item">Genres</a>
+        <a href="../queries/index.php" class="item">Filter</a>
     </div>
 
     <div class="ui black segment">

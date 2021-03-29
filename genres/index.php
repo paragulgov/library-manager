@@ -24,6 +24,7 @@ require_once '../config/connect.php';
         <a href="../index.php" class="item">Books</a>
         <a href="../authors/index.php" class="item">Authors</a>
         <a class="item active">Genres</a>
+        <a href="../queries/index.php" class="item">Filter</a>
     </div>
 
     <div class="ui black segment">
@@ -59,7 +60,7 @@ require_once '../config/connect.php';
                 <td><?= $genre[0] ?></td>
                 <td><?= $genre[1] ?></td>
 
-                <td>
+                <td style="text-align: center">
                     <a href="deleteGenre.php?id=<?= $genre[0] ?>">
                         <div class="ui vertical animated button" tabindex="0">
                             <div class="hidden content">Delete</div>
@@ -69,7 +70,7 @@ require_once '../config/connect.php';
                         </div>
                     </a>
                 </td>
-                <td>
+                <td style="text-align: center">
                     <a href="updatePage.php?id=<?= $genre[0] ?>">
                         <div class="ui vertical animated button" tabindex="0">
                             <div class="hidden content">Edit</div>

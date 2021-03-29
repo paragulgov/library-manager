@@ -24,6 +24,8 @@ require_once '../config/connect.php';
         <a href="../index.php" class="item">Books</a>
         <a class="item active">Authors</a>
         <a href="../genres/index.php" class="item">Genres</a>
+        <a href="../queries/index.php" class="item">Filter</a>
+
     </div>
 
     <div class="ui black segment">
@@ -70,7 +72,7 @@ require_once '../config/connect.php';
                 <td><?= $author[1] ?></td>
                 <td><?= $author[2] ?></td>
                 <td><?= $author[3] ?></td>
-                <td>
+                <td style="text-align: center">
                     <a href="deleteAuthor.php?id=<?= $author[0] ?>">
                         <div class="ui vertical animated button" tabindex="0">
                             <div class="hidden content">Delete</div>
@@ -80,7 +82,7 @@ require_once '../config/connect.php';
                         </div>
                     </a>
                 </td>
-                <td>
+                <td style="text-align: center">
                     <a href="updatePage.php?id=<?= $author[0] ?>">
                         <div class="ui vertical animated button" tabindex="0">
                             <div class="hidden content">Edit</div>

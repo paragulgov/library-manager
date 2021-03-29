@@ -24,6 +24,7 @@ require_once 'config/connect.php';
         <a href="index.php" class="item active">Books</a>
         <a href="authors/index.php" class="item">Authors</a>
         <a href="genres/index.php" class="item">Genres</a>
+        <a href="queries/index.php" class="item">Filter</a>
     </div>
 
     <div class="ui black segment">
