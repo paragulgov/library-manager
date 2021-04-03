@@ -102,9 +102,6 @@ if (isset($_GET['id_book'])) {
             <th>Date write</th>
             <th>Author</th>
             <th>Genre</th>
-            <th>Delete</th>
-            <th>Edit</th>
-            <th>Comments</th>
         </tr>
         </thead>
         <tbody>
@@ -120,27 +117,7 @@ if (isset($_GET['id_book'])) {
                 <td><?= $book[3] ?></td>
                 <td><?= $book[4] ?></td>
                 <td><?= $book[5] ?></td>
-                <td>
-                    <a href="../books/deleteBook.php?id=<?= $book[0] ?>">
-                        <div class="ui vertical animated button" tabindex="0">
-                            <div class="hidden content">Delete</div>
-                            <div class="visible content">
-                                <i class="close icon"></i>
-                            </div>
-                        </div>
-                    </a>
-                </td>
-                <td>
-                    <a href="../books/updatePage.php?id=<?= $book[0] ?>">
-                        <div class="ui vertical animated button" tabindex="0">
-                            <div class="hidden content">Edit</div>
-                            <div class="visible content">
-                                <i class="edit icon"></i>
-                            </div>
-                        </div>
-                    </a>
-                </td>
-                <td>Comment</td>
+
             </tr>
             <?php
         }

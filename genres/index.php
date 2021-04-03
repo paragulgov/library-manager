@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once '../config/connect.php';
 
 ?>
@@ -26,28 +26,38 @@ require_once '../config/connect.php';
         <a class="item active">Genres</a>
         <a href="../queries/index.php" class="item">Filter</a>
     </div>
-
-    <div class="ui black segment">
-        <form action="addGenre.php" method="post" class="ui form">
-            <div class="fields">
-                <div class="field" style="flex-grow: 1">
-                    <label>Genre</label>
-                    <input type="text" placeholder="Genre" name="genre">
+    <?php
+    if ($_SESSION['user']['role'] === 'admin') {
+        ?>
+        <div class="ui black segment">
+            <form action="addGenre.php" method="post" class="ui form">
+                <div class="fields">
+                    <div class="field" style="flex-grow: 1">
+                        <label>Genre</label>
+                        <input type="text" placeholder="Genre" name="genre">
+                    </div>
+                    <button type="submit" class="ui icon button" style="align-self: flex-end; margin-bottom: 2px;">
+                        <i class="plus icon"></i>
+                    </button>
                 </div>
-                <button type="submit" class="ui icon button" style="align-self: flex-end; margin-bottom: 2px;">
-                    <i class="plus icon"></i>
-                </button>
-            </div>
-        </form>
-    </div>
-
+            </form>
+        </div>
+        <?php
+    }
+    ?>
     <table class="ui celled table">
         <thead>
         <tr>
             <th>ID genre</th>
             <th>Genre</th>
-            <th>Delete</th>
-            <th>Edit</th>
+            <?php
+            if ($_SESSION['user']['role'] === 'admin') {
+                ?>
+                <th>Delete</th>
+                <th>Edit</th>
+                <?php
+            }
+            ?>
         </tr>
         </thead>
         <tbody>
@@ -57,9 +67,11 @@ require_once '../config/connect.php';
         foreach ($genres as $genre) {
             ?>
             <tr>
-                <td><?= $genre[0] ?></td>
-                <td><?= $genre[1] ?></td>
-
+            <td><?= $genre[0] ?></td>
+            <td><?= $genre[1] ?></td>
+            <?php
+            if ($_SESSION['user']['role'] === 'admin') {
+                ?>
                 <td style="text-align: center">
                     <a href="deleteGenre.php?id=<?= $genre[0] ?>">
                         <div class="ui vertical animated button" tabindex="0">
@@ -80,8 +92,9 @@ require_once '../config/connect.php';
                         </div>
                     </a>
                 </td>
-            </tr>
-            <?php
+                </tr>
+                <?php
+            }
         }
         ?>
         </tbody>

@@ -1,7 +1,6 @@
 <?php
-
+session_start();
 require_once 'config/connect.php';
-
 ?>
 
 <!doctype html>
@@ -25,66 +24,80 @@ require_once 'config/connect.php';
         <a href="authors/index.php" class="item">Authors</a>
         <a href="genres/index.php" class="item">Genres</a>
         <a href="queries/index.php" class="item">Filter</a>
+        <?php
+        if (isset($_SESSION['user'])) {
+            echo '<a href="auth/logout.php" class="item">Log Out</a>';
+        } else {
+            echo '<a href="auth/auth.php" class="item">Log In</a>';
+        }
+        ?>
     </div>
 
-    <div class="ui black segment">
-        <form action="books/addBook.php" method="post" class="ui form">
-            <div class="fields">
-                <div class="field">
-                    <label>Title</label>
-                    <input type="text" placeholder="Title" name="title">
-                </div>
-                <div class="field">
-                    <label>Description</label>
-                    <input type="text" placeholder="Description" name="description">
-                </div>
-                <div class="field">
-                    <label>Year</label>
-                    <input type="text" maxlength="4" placeholder="Year" name="year">
-                </div>
+    <?php
+    if ($_SESSION['user']['role'] === 'admin') {
+        ?>
+        <div class="ui black segment">
+
+            <form action="books/addBook.php" method="post" class="ui form">
+                <div class="fields">
+                    <div class="field">
+                        <label>Title</label>
+                        <input type="text" placeholder="Title" name="title">
+                    </div>
+                    <div class="field">
+                        <label>Description</label>
+                        <input type="text" placeholder="Description" name="description">
+                    </div>
+                    <div class="field">
+                        <label>Year</label>
+                        <input type="text" maxlength="4" placeholder="Year" name="year">
+                    </div>
 
 
-                <div class="field">
-                    <label>Genre</label>
-                    <select name="genre">
-                        <option value="">Choose a genre</option>
-                        <?php
-                        $genres = mysqli_query($connect, query: "SELECT * FROM `genres`");
-                        $genres = mysqli_fetch_all($genres);
-                        foreach ($genres as $genre) {
-                            ?>
-                            <option value="<?= $genre[0] ?>"><?= $genre[1] ?></option>
+                    <div class="field">
+                        <label>Genre</label>
+                        <select name="genre">
+                            <option value="">Choose a genre</option>
                             <?php
-                        }
-                        ?>
-                    </select>
-                </div>
-
-
-                <div class="field">
-                    <label>Author</label>
-                    <select name="author">
-                        <option value="">Choose author</option>
-
-                        <?php
-                        $authors = mysqli_query($connect, query: "SELECT * FROM `authors`");
-                        $authors = mysqli_fetch_all($authors);
-                        foreach ($authors as $author) {
+                            $genres = mysqli_query($connect, query: "SELECT * FROM `genres`");
+                            $genres = mysqli_fetch_all($genres);
+                            foreach ($genres as $genre) {
+                                ?>
+                                <option value="<?= $genre[0] ?>"><?= $genre[1] ?></option>
+                                <?php
+                            }
                             ?>
-                            <option value="<?= $author[0] ?>"><?= $author[1] ?></option>
+                        </select>
+                    </div>
+
+
+                    <div class="field">
+                        <label>Author</label>
+                        <select name="author">
+                            <option value="">Choose author</option>
+
                             <?php
-                        }
-                        ?>
-                    </select>
+                            $authors = mysqli_query($connect, query: "SELECT * FROM `authors`");
+                            $authors = mysqli_fetch_all($authors);
+                            foreach ($authors as $author) {
+                                ?>
+                                <option value="<?= $author[0] ?>"><?= $author[1] ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="ui icon button" style="align-self: flex-end; margin-bottom: 2px;">
+                        <i class="plus icon"></i>
+                    </button>
+
                 </div>
-
-                <button type="submit" class="ui icon button" style="align-self: flex-end; margin-bottom: 2px;">
-                    <i class="plus icon"></i>
-                </button>
-
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
+        <?php
+    }
+    ?>
 
     <table class="ui celled table">
         <thead>
@@ -95,8 +108,14 @@ require_once 'config/connect.php';
             <th>Date write</th>
             <th>Author</th>
             <th>Genre</th>
-            <th>Delete</th>
-            <th>Edit</th>
+            <?php
+            if ($_SESSION['user']['role'] === 'admin') {
+                ?>
+                <th>Delete</th>
+                <th>Edit</th>
+                <?php
+            }
+            ?>
             <th>Comments</th>
         </tr>
         </thead>
@@ -113,27 +132,42 @@ require_once 'config/connect.php';
                 <td><?= $book[3] ?></td>
                 <td><?= $book[4] ?></td>
                 <td><?= $book[5] ?></td>
+                <?php
+                if ($_SESSION['user']['role'] === 'admin') {
+                    ?>
+                    <td>
+                        <a href="books/deleteBook.php?id=<?= $book[0] ?>">
+                            <div class="ui vertical animated button" tabindex="0">
+                                <div class="hidden content">Delete</div>
+                                <div class="visible content">
+                                    <i class="close icon"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="books/updatePage.php?id=<?= $book[0] ?>">
+                            <div class="ui vertical animated button" tabindex="0">
+                                <div class="hidden content">Edit</div>
+                                <div class="visible content">
+                                    <i class="edit icon"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </td>
+                    <?php
+                }
+                ?>
                 <td>
-                    <a href="books/deleteBook.php?id=<?= $book[0] ?>">
+                    <a href="books/commentsPage.php?id=<?= $book[0] ?>">
                         <div class="ui vertical animated button" tabindex="0">
-                            <div class="hidden content">Delete</div>
+                            <div class="hidden content">Comment</div>
                             <div class="visible content">
-                                <i class="close icon"></i>
+                                <i class="comments icon"></i>
                             </div>
                         </div>
                     </a>
                 </td>
-                <td>
-                    <a href="books/updatePage.php?id=<?= $book[0] ?>">
-                        <div class="ui vertical animated button" tabindex="0">
-                            <div class="hidden content">Edit</div>
-                            <div class="visible content">
-                                <i class="edit icon"></i>
-                            </div>
-                        </div>
-                    </a>
-                </td>
-                <td>Comment</td>
             </tr>
             <?php
         }
