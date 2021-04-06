@@ -76,7 +76,7 @@ $book = mysqli_fetch_assoc($book);
             </div>
             <?php
         }
-        if ($_SESSION['user']) {
+        if (isset($_SESSION['user'])) {
 
             ?>
 
