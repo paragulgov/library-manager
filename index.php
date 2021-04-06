@@ -34,7 +34,7 @@ require_once 'config/connect.php';
     </div>
 
     <?php
-    if ($_SESSION['user']['role'] === 'admin') {
+    if (isset($_SESSION['user']['role']) && ($_SESSION['user']['role'] === 'admin')) {
         ?>
         <div class="ui black segment">
 
@@ -109,7 +109,7 @@ require_once 'config/connect.php';
             <th>Author</th>
             <th>Genre</th>
             <?php
-            if ($_SESSION['user']['role'] === 'admin') {
+            if (isset($_SESSION['user']['role']) && ($_SESSION['user']['role'] === 'admin')) {
                 ?>
                 <th>Delete</th>
                 <th>Edit</th>
@@ -133,7 +133,7 @@ require_once 'config/connect.php';
                 <td><?= $book[4] ?></td>
                 <td><?= $book[5] ?></td>
                 <?php
-                if ($_SESSION['user']['role'] === 'admin') {
+                if (isset($_SESSION['user']['role']) && ($_SESSION['user']['role'] === 'admin')) {
                     ?>
                     <td>
                         <a href="books/deleteBook.php?id=<?= $book[0] ?>">

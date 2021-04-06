@@ -27,7 +27,7 @@ require_once '../config/connect.php';
         <a href="../queries/index.php" class="item">Filter</a>
     </div>
     <?php
-    if ($_SESSION['user']['role'] === 'admin') {
+    if (isset($_SESSION['user']['role']) && ($_SESSION['user']['role'] === 'admin')) {
         ?>
         <div class="ui black segment">
             <form action="addGenre.php" method="post" class="ui form">
@@ -51,7 +51,7 @@ require_once '../config/connect.php';
             <th>ID genre</th>
             <th>Genre</th>
             <?php
-            if ($_SESSION['user']['role'] === 'admin') {
+            if (isset($_SESSION['user']['role']) && ($_SESSION['user']['role'] === 'admin')) {
                 ?>
                 <th>Delete</th>
                 <th>Edit</th>
@@ -70,7 +70,7 @@ require_once '../config/connect.php';
             <td><?= $genre[0] ?></td>
             <td><?= $genre[1] ?></td>
             <?php
-            if ($_SESSION['user']['role'] === 'admin') {
+            if (isset($_SESSION['user']['role']) && ($_SESSION['user']['role'] === 'admin')) {
                 ?>
                 <td style="text-align: center">
                     <a href="deleteGenre.php?id=<?= $genre[0] ?>">

@@ -28,7 +28,7 @@ require_once '../config/connect.php';
 
     </div>
     <?php
-    if ($_SESSION['user']['role'] === 'admin') {
+    if (isset($_SESSION['user']['role']) && ($_SESSION['user']['role'] === 'admin')) {
         ?>
         <div class="ui black segment">
             <form action="addAuthor.php" method="post" class="ui form">
@@ -62,7 +62,7 @@ require_once '../config/connect.php';
             <th>Date of birth</th>
             <th>Date of death</th>
             <?php
-            if ($_SESSION['user']['role'] === 'admin') {
+            if (isset($_SESSION['user']['role']) && ($_SESSION['user']['role'] === 'admin')) {
                 ?>
                 <th>Delete</th>
                 <th>Edit</th>
@@ -83,7 +83,7 @@ require_once '../config/connect.php';
             <td><?= $author[2] ?></td>
             <td><?= $author[3] ?></td>
             <?php
-            if ($_SESSION['user']['role'] === 'admin') {
+            if (isset($_SESSION['user']['role']) && ($_SESSION['user']['role'] === 'admin')) {
                 ?>
                 <td style="text-align: center">
                     <a href="deleteAuthor.php?id=<?= $author[0] ?>">
